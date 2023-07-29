@@ -1,27 +1,26 @@
-name: Publish python distribution to PyPI and TestPyPI 
+name: Publish Python distributions to PyPI and TestPyPI
 
-on: 
-    push: 
-    branches: [master]
-    pull_request: 
-    branches: [master]
-
+on:
+    push:
+    branches: [ master ]
+    pull_request:
+    branches: [ master ]
 
 jobs:
-    buil-n-publish: 
-    name: Build and publish python distributins
+    build-n-publish:
+    name: Build and publish Python distribution
     runs-on: ubuntu-18.04
     steps:
-        - uses: actions/checkout/master
-        - name: Initiallize Python 3.7 
+        - uses: actions/checkout@master
+        - name: Initialize Python 3.7
         uses: actions/setup-python@v1
         with:
             python-version: 3.7
-        - name: Install dependencies 
-        run: | 
+        - name: Install dependencies
+        run: |
             python -m pip install --upgrade pip
-            pip install flake8
-            - name: Lint with flake8
+            pip install flake8            
+        - name: Lint with flake8
         run: |
             # stop the build if there are Python syntax errors or undefined names
             flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
